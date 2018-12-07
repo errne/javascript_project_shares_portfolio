@@ -15,4 +15,15 @@ Stocks.prototype.getPortfolioData = function () {
   .catch(console.error);
 };
 
+
+Stocks.prototype.getStockData = function () {
+  const newRequest = new Request('https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=Health%20Care');
+  newRequest.get()
+  .then((stocks) => {
+    PubSub.publish('Stocks:stocks-data-loaded', stocks);
+  })
+  .catch(console.error);
+};
+
+
 module.exports = Stocks;

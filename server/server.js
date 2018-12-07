@@ -10,7 +10,7 @@ const createRouterPortfolio= require('./helpers/create_router_portfolio.js');
 const publicPath = path.join(__dirname, '../client/public');
 app.use(express.static(publicPath));
 
-MongoClient.connect('mongodb://localhost:?')
+MongoClient.connect('mongodb://localhost:27017')
 .then((client) => {
   const db = client.db('shares_portfolio');
   const stocksCollection = db.collection('stocks');

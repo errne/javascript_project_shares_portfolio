@@ -29,6 +29,19 @@ const createRouter = function(collection){
     });
   })
 
+  // SHOW symbols
+  router.get('/symbols/:symbol', (req, res) => {
+    const symbol = req.params.symbol;
+    collection
+    .findOne({symbol: symbol})
+    .then((doc) => res.json(doc))
+    .catch((error) => {
+      console.error(error);
+      res.status(500);
+      res.json({status: 500, error: error});
+    });
+  })
+
   // CREATE
   router.post('/', (req, res) => {
     const newData = req.body;

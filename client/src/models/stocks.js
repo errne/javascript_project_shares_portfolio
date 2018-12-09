@@ -4,6 +4,8 @@ const RequestHelper = require('../helpers/request_helper.js');
 const Stocks = function (url) {
   this.url = url;
   this.request = new RequestHelper(this.url);
+  this.stockData = [];
+  this.portfolioData = [];
 };
 
 Stocks.prototype.getPortfolioData = function () {

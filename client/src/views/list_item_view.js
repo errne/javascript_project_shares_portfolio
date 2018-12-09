@@ -23,10 +23,20 @@ ListItemView.prototype.renderPortfolio = function (share) {
   latestPrice.textContent = `Latest price: $ ${share.latestPrice}`;
   shareContainer.appendChild(latestPrice);
 
+  const priceChange = document.createElement('p');
+  priceChange.className = 'share-price-change';
+  priceChange.textContent = `Change: $ ${share.change}`;
+  shareContainer.appendChild(priceChange);
+
   const amountOfShares = document.createElement('p');
   amountOfShares.className = 'share-amount';
-  amountOfShares.textContent = share.amount;
+  amountOfShares.textContent = `Holdings: ${share.amount}`;
   shareContainer.appendChild(amountOfShares);
+
+  const totalValue = document.createElement('p');
+  totalValue.className = 'total-value';
+  totalValue.textContent = `Total value: $ ${share.amount * share.latestPrice}`;
+  shareContainer.appendChild(totalValue);
 
   this.container.appendChild(shareContainer);
 };

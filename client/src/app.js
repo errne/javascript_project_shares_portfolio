@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const portfolioListView = new PortfolioListView(stockList);
   portfolioListView.bindEvents();
 
-  const stockView = new StockListView(stocklist);
+  const stockView = new StockListView(stockList);
   stockView.bindEvents();
 
 });

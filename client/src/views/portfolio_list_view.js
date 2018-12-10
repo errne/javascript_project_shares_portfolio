@@ -1,7 +1,7 @@
 const PubSub = require('../helpers/pubsub.js');
 const ListItemView = require('./list_item_view.js');
 
-const PortfolioListView= function (container) {
+const PortfolioListView = function (container) {
   this.container = container;
   console.log("container", this.container);
 };

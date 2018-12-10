@@ -41,5 +41,23 @@ ListItemView.prototype.renderPortfolio = function (share) {
   this.container.appendChild(shareContainer);
 };
 
+ListItemView.prototype.renderStockList = function (stocks) {
+
+  const stockContainer = document.createElement('div');
+
+  const company = document.createElement('h3');
+  company.className = 'company';
+  company.textContent = stocks.companyName;
+  stockContainer.appendChild(company);
+
+  stockContainer.className = 'stocks';
+  const symbol = document.createElement('p');
+  symbol.className = 'symbol';
+  symbol.textContent = stocks.symbol;
+  stockContainer.appendChild(symbol);
+
+  this.container.appendChild(stockContainer);
+}
+
 
 module.exports = ListItemView;

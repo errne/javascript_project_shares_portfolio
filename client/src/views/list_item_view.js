@@ -18,18 +18,46 @@ ListItemView.prototype.renderPortfolio = function (share) {
   symbol.textContent = share.symbol;
   shareContainer.appendChild(symbol);
 
-  // const latestPrice = document.createElement('p');
-  // latestPrice.className = 'share-latestPrice';
-  // latestPrice.textContent = share.latestPrice;
-  // shareContainer.appendChild(latestPrice);
+  const latestPrice = document.createElement('p');
+  latestPrice.className = 'share-latestPrice';
+  latestPrice.textContent = `Latest price: $ ${share.latestPrice}`;
+  shareContainer.appendChild(latestPrice);
+
+  const priceChange = document.createElement('p');
+  priceChange.className = 'share-price-change';
+  priceChange.textContent = `Change: $ ${share.change}`;
+  shareContainer.appendChild(priceChange);
 
   const amountOfShares = document.createElement('p');
   amountOfShares.className = 'share-amount';
-  amountOfShares.textContent = share.amount;
+  amountOfShares.textContent = `Holdings: ${share.amount}`;
   shareContainer.appendChild(amountOfShares);
+
+  const totalValue = document.createElement('p');
+  totalValue.className = 'total-value';
+  totalValue.textContent = `Total value: $ ${share.amount * share.latestPrice}`;
+  shareContainer.appendChild(totalValue);
 
   this.container.appendChild(shareContainer);
 };
+
+ListItemView.prototype.renderStockList = function (stocks) {
+
+  const stockContainer = document.createElement('div');
+
+  const company = document.createElement('h3');
+  company.className = 'company';
+  company.textContent = stocks.companyName;
+  stockContainer.appendChild(company);
+
+  stockContainer.className = 'stocks';
+  const symbol = document.createElement('p');
+  symbol.className = 'symbol';
+  symbol.textContent = stocks.symbol;
+  stockContainer.appendChild(symbol);
+
+  this.container.appendChild(stockContainer);
+}
 
 
 module.exports = ListItemView;

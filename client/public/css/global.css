@@ -1,0 +1,141 @@
+:root {
+  --black: hsla(205, 10%, 10%, 1);
+  --notGrey: hsla(0, 0%, 85%, 1);
+  --notGreyIsh: hsla(0, 0%, 85%, 0.35);
+
+  --cream: hsla(60, 100%, %, 1);
+
+  --blue: hsla(205, 85%, 38%, 1);
+
+  --red: hsla(4, 75%, 47.5%, 1);
+  --green: hsla(105, 95%, 40%, 1);
+
+
+  --sans: 'Lato', Helvetica, sans-serif;
+  --serif: 'Playfair Display', Times, serif;
+}
+
+
+
+.red {
+  color: var(--red);
+}
+.green {
+  color: var(--green);
+  /* text-shadow: 1px 1px 0.5px var(--notGrey), -1px -1px 0.5px var(--notGrey); */
+}
+.serif {
+  font-family: var(--serif);
+}
+.sans {
+  font-family: var(--sans);
+  font-weight: lighter;
+  font-size: 56px;
+}
+
+* {
+  font-family: var(--sans);
+  background-color: var(--cream);
+  color: var(--black);
+  text-shadow: 0.5px 0.5px 0.2px var(--notGrey);
+  font-weight: 300;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--sans);
+  font-weight: 200;
+}
+
+h1 {
+  font-size: 10vh;
+  text-decoration: underline var(--blue) solid;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+h1 {
+  line-height: 1;
+}
+header nav {
+  padding: 0;
+}
+header, main, aside, nav, footer {
+ padding: 1vw;
+}
+header, ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+}
+li {
+  margin-left: 2vw;
+  padding-right: 2vw;
+  color: var(--black);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 2.5vh;
+}
+
+li:hover {
+  text-decoration: underline var(--blue) solid;
+}
+
+header {
+  border-top: 3px solid var(--blue);
+  border-right: 3px solid var(--blue);
+  border-left: 3px solid var(--blue);
+
+  grid-area: header;
+  border-bottom: 1px solid var(--notGrey);
+  box-shadow: 0 1px 5px var(--notGreyIsh);
+  z-index: 5;
+}
+aside {
+  grid-area: aside;
+  border-right: 0.5px solid var(--notGrey);
+
+  border-left: 3px solid var(--blue);
+
+  box-shadow: 0.5px 0 5px var(--notGreyIsh);
+  z-index: 4;
+  border-bottom: 3px solid var(--blue);
+
+}
+main {
+  grid-area: main;
+  padding: 0;
+  border-right: 3px solid var(--blue);
+}
+main p {
+  padding: 2vw;
+}
+footer {
+  grid-area: footer;
+  border-top: 0.5px solid var(--notGrey);
+}
+
+nav {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+
+#mobile_nav {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  grid-area: mobile_nav;
+  border-top: 0.5px solid var(--notGrey);
+  width: 100%;
+  height: 7.5vh;
+  box-shadow: 0 -1px 5px var(--notGreyIsh);
+
+  border-bottom: 3px solid var(--blue);
+
+}

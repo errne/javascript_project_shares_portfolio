@@ -17,25 +17,15 @@ Stocks.prototype.getPortfolioData = function () {
   .catch(console.error);
 };
 
-
-Stocks.prototype.getStockData = function () {
-  const newRequest = new Request('https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=Health%20Care');
-  newRequest.get()
-  .then((stocks) => {
-    PubSub.publish('Stocks:stocks-data-loaded', stocks);
-  })
-  .catch(console.error);
-};
-
 Stocks.prototype.getStocksForPortfolio = function () {
   const extraRequest = new RequestHelper('https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=Health%20Care');
   extraRequest.get()
   .then((stocks) => {
+    PubSub.publish('Stocks:stocks-data-loaded', stocks);
     this.stockData = stocks;
     const portfolioSymbols = this.portfolioData.map(share => share.symbol);
     this.stockData = this.stockData.filter(share => portfolioSymbols.includes(share.symbol));
     this.updatePortfolio();
-  //  PubSub.publish('Stocks:stocks-data-loaded', this.stockData);
   })
   .catch(console.error);
 };
@@ -43,8 +33,6 @@ Stocks.prototype.getStocksForPortfolio = function () {
 Stocks.prototype.updatePortfolio = function () {
   this.stockData.forEach((share) => {
     const shareID = this.findID(share);
-  //  console.log(share);
-  //  console.log(shareID);
     this.request.update(shareID, share)
     .then((shares) => {
       PubSub.publish('Stocks:portfolio-data-loaded', shares);

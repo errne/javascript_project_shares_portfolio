@@ -67,7 +67,7 @@ ListItemView.prototype.renderStockList = function (stock) {
 
   link.addEventListener('click', (event) => {
     event.preventDefault();
-    PubSub.publish('ListItemView:link-clicked', stock.symbol);
+    PubSub.publish('ListItemView:stock-link-clicked', stock.symbol);
   });
 
   const symbol = document.createElement('p');

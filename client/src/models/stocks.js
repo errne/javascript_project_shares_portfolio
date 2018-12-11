@@ -10,11 +10,21 @@ const Stocks = function (url) {
 
 Stocks.prototype.bindEvents = function () {
   PubSub.subscribe('ListItemView:link-clicked', (event) => {
-    console.log(event.detail);
     this.getMoreInfoOnStock(event.detail)
     .then((stock) => {
       const amount = this.portfolioData.filter(share => share.symbol ===  event.detail);
       stock.amount = amount[0].amount;
+      console.log(stock.amount);
+      PubSub.publish('Stock:stock-info-loaded', stock);
+    })
+    .catch(console.error);
+  });
+
+  PubSub.subscribe('ListItemView:stock-link-clicked', (event) => {
+    this.getMoreInfoOnStock(event.detail)
+    .then((stock) => {
+      console.log(stock);
+      stock.amount = 0;
       console.log(stock.amount);
       PubSub.publish('Stock:stock-info-loaded', stock);
     })

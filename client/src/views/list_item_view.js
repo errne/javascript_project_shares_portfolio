@@ -51,7 +51,7 @@ ListItemView.prototype.renderPortfolio = function (share) {
   this.container.appendChild(shareContainer);
 };
 
-ListItemView.prototype.renderStockList = function (stocks) {
+ListItemView.prototype.renderStockList = function (stock) {
 
   const stockContainer = document.createElement('div');
   stockContainer.className = 'stocks';
@@ -62,18 +62,28 @@ ListItemView.prototype.renderStockList = function (stocks) {
 
   const company = document.createElement('h3');
   company.className = 'company';
-  company.textContent = stocks.companyName;
+  company.textContent = stock.companyName;
   link.appendChild(company);
 
   link.addEventListener('click', (event) => {
     event.preventDefault();
-    PubSub.publish('ListItemView:link-clicked', stocks.symbol);
+    PubSub.publish('ListItemView:link-clicked', stock.symbol);
   });
 
   const symbol = document.createElement('p');
   symbol.className = 'symbol';
-  symbol.textContent = stocks.symbol;
+  symbol.textContent = stock.symbol;
   stockContainer.appendChild(symbol);
+
+  const latestPrice = document.createElement('p');
+  latestPrice.className = 'share-latestPrice';
+  latestPrice.textContent = `Latest price: $ ${stock.latestPrice}`;
+  stockContainer.appendChild(latestPrice);
+
+  const priceChange = document.createElement('p');
+  priceChange.className = 'share-price-change';
+  priceChange.textContent = `Change: $ ${stock.change}`;
+  stockContainer.appendChild(priceChange);
 
   this.container.appendChild(stockContainer);
 }

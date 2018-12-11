@@ -2,18 +2,9 @@ const PubSub = require('../helpers/pubsub.js');
 
 const StockDetailView = function (container) {
   this.container = container;
-
 };
 
-StockDetailView.prototype.bindEvents = function () {
-  PubSub.subscribe('Stock:stock-info-loaded'), (event) => {
-    this.renderStockDetail(event.detail);
-    console.log('sdkjv', event.detail);
-  }
-};
-
-StockDetailView.prototype.renderStockDetail = function (stock) {
-  console.log(stock);
+StockDetailView.prototype.render = function (stock) {
   const stockDetailContainer = document.createElement('div');
   stockDetailContainer.className = 'stock-detail';
 
@@ -37,9 +28,10 @@ StockDetailView.prototype.renderStockDetail = function (stock) {
   description.textContent = stock.description;
   stockDetailContainer.appendChild(description);
 
-  const website = document.createElement('p');
+  const website = document.createElement('a');
   website.className = 'stock-website';
   website.textContent = stock.website;
+  website.href = stock.website;
   stockDetailContainer.appendChild(website);
 
   const ceo = document.createElement('p');
@@ -47,6 +39,7 @@ StockDetailView.prototype.renderStockDetail = function (stock) {
   ceo.textContent = stock.ceo;
   stockDetailContainer.appendChild(ceo);
 
+  this.container.appendChild(stockDetailContainer);
 };
 
 module.exports = StockDetailView;

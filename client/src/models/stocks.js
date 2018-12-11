@@ -9,9 +9,13 @@ const Stocks = function (url) {
 };
 
 Stocks.prototype.bindEvents = function () {
-  PubSub.subscribe('ListItemView:stock-symbol', (event) => {
-    this.getMoreInfoOnStock(event.detail);
-  })
+  PubSub.subscribe('ListItemView:link-clicked', (event) => {
+    this.getMoreInfoOnStock(event.detail)
+      .then((stock) => {
+        PubSub.publish('Stock:stock-info-loaded', stock);
+      })
+      .catch(console.error);
+  });
 };
 
 
@@ -40,11 +44,7 @@ Stocks.prototype.getStocksForPortfolio = function () {
 
 Stocks.prototype.getMoreInfoOnStock = function (symbol) {
   const request = new RequestHelper(`https://api.iextrading.com/1.0/stock/${symbol}/company`)
-  request.get()
-  .then((stock) => {
-    PubSub.publish('Stock:stock-info-loaded', stock);
-  })
-  .catch(console.error);
+  return request.get();
 };
 
 Stocks.prototype.updatePortfolio = function () {

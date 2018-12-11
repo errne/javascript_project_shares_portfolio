@@ -1,7 +1,6 @@
 const Stocks = require('./models/stocks.js');
 const PortfolioListView = require('./views/portfolio_list_view.js');
 const StockListView = require('./views/stock_list_view.js');
-const StockDetailView = require('./views/stock_detail_view.js');
 const ShowStockDetailView = require('./views/show_stock_detail_view.js');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,13 +8,32 @@ document.addEventListener('DOMContentLoaded', () => {
   stocksPortfolio.getPortfolioData();
   stocksPortfolio.getStocksForPortfolio();
 
-  const stockList = document.querySelector('.stocklist');
-  const portfolioListView = new PortfolioListView(stockList);
+  const stocksShares = new Stocks('http://localhost:300/api/stocks/');
+  stocksShares.bindEvents();
+
+  const appContainer = document.querySelector('.app-container');
+
+  const portfolioListView = new PortfolioListView(appContainer);
   portfolioListView.bindEvents();
 
-  const stockView = new StockListView(stockList);
+  const stockView = new StockListView(appContainer);
   stockView.bindEvents();
-  const stockDetailView = new StockDetailView(stockList);
-  stockDetailView.bindEvents();
-// where to do correct bind events 
+
+  // const portfolioLink = document.querySelector('#portfolio_link');
+  // portfolioLink.addEventListener('click', (event) => {
+  //   event.preventDefault();
+  //   stocksPortfolio.getStocksForPortfolio();
+  //   // render triggered by sub callback in bindEvents();
+  // });
+  //
+  // const stocksLink = document.querySelector('#stocks_link');
+  // portfolioLink.addEventListener('click', (event) => {
+  //   event.preventDefault();
+  //   stocksPortfolio.getStocksForPortfolio();
+  //   // render not triggered by sub callback in bindEvents(), so...
+  //   stockListView.render();
+  //   });
+
+  const showStockDetailView = new ShowStockDetailView(appContainer);
+  showStockDetailView.bindEvents();
 });

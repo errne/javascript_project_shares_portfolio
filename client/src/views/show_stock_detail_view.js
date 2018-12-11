@@ -1,3 +1,4 @@
+const PubSub = require('../helpers/pubsub.js');
 const StockFormView = require('./stock_form_view.js');
 const StockDetailView = require('./stock_detail_view.js');
 
@@ -6,15 +7,20 @@ const ShowStockDetailView = function (container, symbol) {
   this.symbol = symbol;
 };
 
-ShowStockDetailView.prototype.render = function () {
+ShowStockDetailView.prototype.bindEvents = function () {
+  PubSub.subscribe('Stock:stock-info-loaded', (event) => {
+    this.render(event.detail);
+  });
+};
+
+ShowStockDetailView.prototype.render = function (stock) {
   this.container.innerHTML = '';
-  // const stockFormView = new StockFormView(this.symbol);
-  const stockDetailView = new StockDetailView();
+
+  // const stockFormView = new StockFormView(this.container, this.symbol);
   // stockFormView.renderForm();
-  stockDetailView.renderStockDetail();
-  this.container.appendChild(stockDetailView);
-  // this.container.appendChild(stockFormView);
-  console.log('dfkjf');
+
+  const stockDetailView = new StockDetailView(this.container);
+  stockDetailView.render(stock);
 };
 
 module.exports = ShowStockDetailView;

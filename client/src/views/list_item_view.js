@@ -63,11 +63,11 @@ ListItemView.prototype.renderStockList = function (stocks) {
   const company = document.createElement('h3');
   company.className = 'company';
   company.textContent = stocks.companyName;
-  link.appendChild(name);
+  link.appendChild(company);
 
   link.addEventListener('click', (event) => {
     event.preventDefault();
-    PubSub.publish('ListItemView:link-clicked', share.symbol);
+    PubSub.publish('ListItemView:link-clicked', stocks.symbol);
   });
 
   const symbol = document.createElement('p');

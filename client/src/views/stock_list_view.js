@@ -3,18 +3,21 @@ const ListItemView = require('./list_item_view.js');
 
 const StockListView= function (container) {
   this.container = container;
+  this.allShares = null;
 };
 
 StockListView.prototype.bindEvents = function () {
   PubSub.subscribe('Stocks:stocks-data-loaded', (event) => {
     const chart = event.detail;
+    this.allShares = event.detail;
+    console.log('All shares: ', this.allShares);
   })
 };
 
 StockListView.prototype.render = function (shares) {
   this.container.innerHTML = '';
   const listItemView = new ListItemView(this.container);
-  Array.from(shares).forEach((stocks) => listItemView.renderStockList(stocks));
+  this.allShares.forEach((share) => listItemView.renderStockList(share));
 };
 
 module.exports = StockListView;

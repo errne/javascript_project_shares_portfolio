@@ -41,6 +41,15 @@ Stocks.prototype.getStocksForPortfolio = function () {
   .catch(console.error);
 };
 
+Stocks.prototype.getStocksLatest = function () {
+  const extraRequest = new RequestHelper('https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=Health%20Care');
+  extraRequest.get()
+  .then((stocks) => {
+    PubSub.publish('Stocks:stocks-data-loaded', stocks);
+  })
+  .catch(console.error);
+};
+
 
 Stocks.prototype.getMoreInfoOnStock = function (symbol) {
   const request = new RequestHelper(`https://api.iextrading.com/1.0/stock/${symbol}/company`)

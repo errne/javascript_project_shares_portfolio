@@ -3,7 +3,7 @@
   --notGrey: hsla(0, 0%, 85%, 1);
   --notGreyIsh: hsla(0, 0%, 85%, 0.35);
 
-  --cream: hsla(60, 100%, %, 1);
+  --cream: hsla(60, 100%, 99.9%, 1);
 
   --blue: hsla(205, 85%, 38%, 1);
 
@@ -11,7 +11,7 @@
   --green: hsla(105, 95%, 40%, 1);
 
 
-  --sans: 'Lato', Helvetica, sans-serif;
+  --sans:  'Roboto', Helvetica ,sans-serif;;
   --serif: 'Playfair Display', Times, serif;
 }
 

@@ -32,6 +32,7 @@ StockDetailView.prototype.render = function (stock) {
   website.className = 'stock-website';
   website.textContent = stock.website;
   website.href = stock.website;
+  website.target = '_blank';
   stockDetailContainer.appendChild(website);
 
   const ceo = document.createElement('p');

@@ -13,7 +13,17 @@ main {
   border-left: 3px solid var(--blue);
 }
 
+.app-container {
+  min-height: 77vh;
+  padding: 2vw;
+  padding-left: 3vw;
+}
+
 aside {
+  display: none;
+}
+
+footer {
   display: none;
 }
 

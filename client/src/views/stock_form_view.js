@@ -34,6 +34,17 @@ StockFormView.prototype.renderRemoveButton = function (input, stock) {
     };
     PubSub.publish('FormView:remove-clicked', data);
   });
+
+  const deleteButton = document.createElement('button');
+  const delBtnText = document.createTextNode('delete all shares');
+  deleteButton.appendChild(delBtnText);
+
+  this.container.appendChild(deleteButton);
+
+  deleteButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    PubSub.publish('FormView:delete-clicked', stock);
+  });
 };
 
 

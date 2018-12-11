@@ -20,8 +20,13 @@ Stocks.prototype.bindEvents = function () {
     })
     .catch(console.error);
   });
+
   PubSub.subscribe('FormView:remove-clicked', (event) => {
     this.removeShare(event.detail);
+  });
+
+  PubSub.subscribe('FormView:delete-clicked', (event) => {
+    this.deleteShare(event.detail);
   })
 };
 
@@ -88,6 +93,17 @@ Stocks.prototype.removeShare = function (data) {
 
   data.share.amount = newShareAmount;
   this.request.update(shareID, data.share)
+  .then((shares) => {
+    this.getPortfolioData();
+    PubSub.publish('Stocks:portfolio-data-loaded', shares)
+})
+.catch(console.error);
+};
+
+Stocks.prototype.deleteShare = function (data) {
+  console.log(data);
+  const deleteID = this.findID(data);
+  this.request.delete(deleteID)
   .then((shares) => {
     this.getPortfolioData();
     PubSub.publish('Stocks:portfolio-data-loaded', shares)

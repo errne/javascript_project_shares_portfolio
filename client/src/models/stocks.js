@@ -15,7 +15,7 @@ Stocks.prototype.bindEvents = function () {
     .then((stock) => {
       const amount = this.portfolioData.filter(share => share.symbol ===  event.detail);
       stock.amount = amount[0].amount;
-      console.log(amount);
+      console.log(stock.amount);
       PubSub.publish('Stock:stock-info-loaded', stock);
     })
     .catch(console.error);
@@ -83,11 +83,13 @@ Stocks.prototype.removeShare = function (data) {
   console.log('data', data);
   const shareAmount = data.share.amount;
   const shareID = this.findID(data.share);
-  const newShareAmount = shareAmount - data.numberOfShares;
+  console.log(data.numberOfShares);
+  const newShareAmount = (parseInt(shareAmount) + parseInt(data.numberOfShares));
 
   data.share.amount = newShareAmount;
   this.request.update(shareID, data.share)
   .then((shares) => {
+    this.getPortfolioData();
     PubSub.publish('Stocks:portfolio-data-loaded', shares)
 })
 .catch(console.error);

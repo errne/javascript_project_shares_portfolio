@@ -6,7 +6,6 @@ const StockFormView = function (container, stock) {
 };
 
 StockFormView.prototype.render = function (stock) {
-console.log(stock);
 
   const input = document.createElement('input');
   input.type = 'number';
@@ -22,7 +21,7 @@ StockFormView.prototype.renderRemoveButton = function (input, stock) {
   console.log('input', input);
   console.log('stock', stock);
   const removeButton = document.createElement('button');
-  const text = document.createTextNode('remove shares');
+  const text = document.createTextNode('add/remove shares');
   removeButton.appendChild(text);
 
   this.container.appendChild(removeButton);
@@ -33,7 +32,6 @@ StockFormView.prototype.renderRemoveButton = function (input, stock) {
       numberOfShares: input.value,
       share: stock
     };
-    console.log('before pub', data);
     PubSub.publish('FormView:remove-clicked', data);
   });
 };

@@ -73,10 +73,11 @@ Stocks.prototype.findID = function (share) {
 Stocks.prototype.removeShare = function (data) {
   console.log('data', data);
   const shareAmount = data.share.amount;
-  this.findID(data.share);
-  const newShareAmount = (shareAmount -= data.numberOfShares);
-  share.amount = newShareAmount;
-  this.request.update(shareID, share)
+  const shareID = this.findID(data.share);
+  const newShareAmount = shareAmount - data.numberOfShares;
+
+  data.share.amount = newShareAmount;
+  this.request.update(shareID, data.share)
   .then((shares) => {
     PubSub.publish('Stocks:portfolio-data-loaded', shares)
 })

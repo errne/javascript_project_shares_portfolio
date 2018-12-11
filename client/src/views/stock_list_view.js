@@ -10,7 +10,6 @@ StockListView.prototype.bindEvents = function () {
   PubSub.subscribe('Stocks:stocks-data-loaded', (event) => {
     const chart = event.detail;
     this.allShares = event.detail;
-    console.log('All shares: ', this.allShares);
   })
 };
 

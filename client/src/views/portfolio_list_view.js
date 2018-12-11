@@ -17,6 +17,4 @@ PortfolioListView.prototype.render = function (shares) {
   shares.forEach((stockInPortfolio) => listItemView.renderPortfolio(stockInPortfolio));
 };
 
-
-
 module.exports = PortfolioListView;

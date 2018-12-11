@@ -10,14 +10,17 @@ const ShowStockDetailView = function (container, symbol) {
 ShowStockDetailView.prototype.bindEvents = function () {
   PubSub.subscribe('Stock:stock-info-loaded', (event) => {
     this.render(event.detail);
+    console.log(event.detail);
   });
+
 };
 
 ShowStockDetailView.prototype.render = function (stock) {
   this.container.innerHTML = '';
 
-  // const stockFormView = new StockFormView(this.container, this.symbol);
-  // stockFormView.renderForm();
+  const stockFormView = new StockFormView(this.container, stock);
+  stockFormView.render(stock);
+
 
   const stockDetailView = new StockDetailView(this.container);
   stockDetailView.render(stock);

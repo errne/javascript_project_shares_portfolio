@@ -1,0 +1,42 @@
+const PubSub = require('../helpers/pubsub.js');
+
+const StockFormView = function (container, stock) {
+  this.container = container;
+  this.stock = stock;
+};
+
+StockFormView.prototype.render = function (stock) {
+console.log(stock);
+
+  const input = document.createElement('input');
+  input.type = 'number';
+  input.addClassName = 'input-shares';
+  this.container.appendChild(input);
+
+  this.renderRemoveButton(input, stock);
+
+
+};
+
+StockFormView.prototype.renderRemoveButton = function (input, stock) {
+  console.log('input', input);
+  console.log('stock', stock);
+  const removeButton = document.createElement('button');
+  const text = document.createTextNode('remove shares');
+  removeButton.appendChild(text);
+
+  this.container.appendChild(removeButton);
+
+  removeButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    const data = {
+      numberOfShares: input.value,
+      share: stock
+    };
+    console.log('before pub', data);
+    PubSub.publish('FormView:remove-clicked', data);
+  });
+};
+
+
+module.exports = StockFormView;

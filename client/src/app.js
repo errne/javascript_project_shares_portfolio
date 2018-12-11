@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     stocksPortfolio.getStocksForPortfolio();
     // render not triggered by sub callback in bindEvents(), so...
     stockListView.render();
+    });
 // ----------- LINKS IN HEADER ----------------//
 
 

@@ -39,6 +39,12 @@ StockDetailView.prototype.render = function (stock) {
   ceo.textContent = stock.ceo;
   stockDetailContainer.appendChild(ceo);
 
+  const amount = document.createElement('p');
+  amount.className = 'stock-amount';
+  amount.textContent = stock.amount;
+  stockDetailContainer.appendChild(amount);
+
+
   this.container.appendChild(stockDetailContainer);
 };
 

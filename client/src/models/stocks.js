@@ -10,14 +10,20 @@ const Stocks = function (url) {
 
 Stocks.prototype.bindEvents = function () {
   PubSub.subscribe('ListItemView:link-clicked', (event) => {
+    console.log(event.detail);
     this.getMoreInfoOnStock(event.detail)
-      .then((stock) => {
-        PubSub.publish('Stock:stock-info-loaded', stock);
-      })
-      .catch(console.error);
+    .then((stock) => {
+      const amount = this.portfolioData.filter(share => share.symbol ===  event.detail);
+      stock.amount = amount[0].amount;
+      console.log(amount);
+      PubSub.publish('Stock:stock-info-loaded', stock);
+    })
+    .catch(console.error);
   });
+  PubSub.subscribe('FormView:remove-clicked', (event) => {
+    this.removeShare(event.detail);
+  })
 };
-
 
 Stocks.prototype.getPortfolioData = function () {
   this.request.get()
@@ -43,7 +49,7 @@ Stocks.prototype.getStocksForPortfolio = function () {
 
 
 Stocks.prototype.getMoreInfoOnStock = function (symbol) {
-  const request = new RequestHelper(`https://api.iextrading.com/1.0/stock/${symbol}/company`)
+  const request = new RequestHelper(`https://api.iextrading.com/1.0/stock/${symbol}/company`);
   return request.get();
 };
 
@@ -63,6 +69,20 @@ Stocks.prototype.findID = function (share) {
   const shareID = stock[0]._id;
   return shareID;
 };
+
+Stocks.prototype.removeShare = function (data) {
+  console.log('data', data);
+  const shareAmount = data.share.amount;
+  this.findID(data.share);
+  const newShareAmount = (shareAmount -= data.numberOfShares);
+  share.amount = newShareAmount;
+  this.request.update(shareID, share)
+  .then((shares) => {
+    PubSub.publish('Stocks:portfolio-data-loaded', shares)
+})
+.catch(console.error);
+};
+
 
 
 module.exports = Stocks;

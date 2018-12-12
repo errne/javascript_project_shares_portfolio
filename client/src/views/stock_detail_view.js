@@ -37,7 +37,7 @@ StockDetailView.prototype.render = function (stock) {
 
   const ceo = document.createElement('p');
   ceo.className = 'stock-ceo';
-  ceo.textContent = stock.ceo;
+  ceo.textContent = `Company CEO: ${stock.CEO}`;
   stockDetailContainer.appendChild(ceo);
 
   const amount = document.createElement('p');

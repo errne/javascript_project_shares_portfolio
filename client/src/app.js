@@ -10,26 +10,26 @@ document.addEventListener('DOMContentLoaded', () => {
   stocksPortfolio.getPortfolioData();
   stocksPortfolio.getStocksForPortfolio();
   stocksPortfolio.bindEvents();
-<<<<<<< HEAD
-=======
+// <<<<<<< HEAD
+// =======
 
   // const stocksShares = new Stocks('http://localhost:300/api/stocks/');
   // stocksShares.bindEvents();
->>>>>>> develop
+//>>>>>>> develop
 
   const appContainer = document.querySelector('.app-container');
 
   const portfolioListView = new PortfolioListView(appContainer);
   portfolioListView.bindEvents();
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
   const stockListView = new StockListView(appContainer);
   stockListView.bindEvents();
-=======
+//=======
   const stockView = new StockListView(appContainer);
   stockView.bindEvents();
 
->>>>>>> develop
+//>>>>>>> develop
 
   const showStockDetailView = new ShowStockDetailView(appContainer);
   showStockDetailView.bindEvents();

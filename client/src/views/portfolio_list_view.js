@@ -30,6 +30,7 @@ PortfolioListView.prototype.renderPieChart = function (shares) {
   chartContainer.className ='pie-chart';
   const pieChart = new PieChart('Portfolio diversification chart', dataForChart, chartContainer);
   this.container.appendChild(chartContainer);
+};
 
 
 PortfolioListView.prototype.renderSummary = function (sharesHeld) {

@@ -45,7 +45,8 @@ ListItemView.prototype.renderPortfolio = function (share) {
 
   const totalValue = document.createElement('p');
   totalValue.className = 'total-value';
-  totalValue.textContent = `Total value: $ ${share.amount * share.latestPrice}`;
+  const total = share.amount * share.latestPrice;
+  totalValue.textContent = `Total value:  ${total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`;
   shareContainer.appendChild(totalValue);
 
   this.container.appendChild(shareContainer);

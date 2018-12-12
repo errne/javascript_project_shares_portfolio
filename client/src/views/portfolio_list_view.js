@@ -7,7 +7,9 @@ const PortfolioListView = function (container) {
 
 PortfolioListView.prototype.bindEvents = function () {
   PubSub.subscribe('Stocks:portfolio-data-loaded', (event) => {
+    console.log('Portfolio-data-loaded: ', event.detail);
     this.render(event.detail);
+    this.renderSummary(event.detail);
   })
 };
 
@@ -23,23 +25,23 @@ PortfolioListView.prototype.renderSummary = function (sharesHeld) {
   };
   // Calc info
   const newTotal = sharesHeld.reduce((sum, share) =>{
-    return sum + share.
+    return sum + (share.latestPrice * share.amount);
   }, 0);
   const change = sharesHeld.reduce((sum, share) =>{
-    return sum + share.
+    return sum + (share.change * share.amount);
   }, 0);
   const oldTotal = newTotal - change;
-  const percentage = getPercentage()
+  const percentage = getPercentage(change, oldTotal);
 
   // Render to page
   const tabSummary = document.createElement('div');
   tabSummary.classList = 'tab_summary';
   const totalElem = document.createElement('p');
-  totalElem.textContent = `Portfolio Total: £${total}`
+  totalElem.textContent = `Portfolio Total: $${newTotal.toFixed(2)}`
   const changeElem = document.createElement('p');
-  changeElem.textContent = `Portfolio Change: £${change}`
+  changeElem.textContent = `Portfolio Change: $${change.toFixed(2)}`
   const percentElem = document.createElement('p');
-  percentElem.textContent = `Percentage Change: £${percentage}`
+  percentElem.textContent = `Percentage Change: ${percentage}%`
 
   tabSummary.appendChild(totalElem);
   tabSummary.appendChild(changeElem);

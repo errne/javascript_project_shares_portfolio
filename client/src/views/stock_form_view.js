@@ -14,12 +14,14 @@ StockFormView.prototype.render = function (stock) {
 
   this.renderRemoveButton(input, stock);
 
+  if (stock.amount < 1) {
+    this.renderAddNewButton(stock);
+  }
+
 
 };
 
 StockFormView.prototype.renderRemoveButton = function (input, stock) {
-  console.log('input', input);
-  console.log('stock', stock);
   const removeButton = document.createElement('button');
   const text = document.createTextNode('add/remove shares');
   removeButton.appendChild(text);
@@ -44,6 +46,20 @@ StockFormView.prototype.renderRemoveButton = function (input, stock) {
   deleteButton.addEventListener('click', (event) => {
     event.preventDefault();
     PubSub.publish('FormView:delete-clicked', stock);
+  });
+};
+
+StockFormView.prototype.renderAddNewButton = function (stock) {
+  console.log('cliking', stock);
+  const addNewButton = document.createElement('button');
+  const text = document.createTextNode('add to your portfolio');
+  addNewButton.appendChild(text);
+
+  this.container.appendChild(addNewButton);
+
+  addNewButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    PubSub.publish('FormView:add-to-portfolio-clicked', stock);
   });
 };
 

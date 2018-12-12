@@ -16,13 +16,12 @@ ShowStockDetailView.prototype.bindEvents = function () {
 
 ShowStockDetailView.prototype.render = function (stock) {
   this.container.innerHTML = '';
+  this.container.className = 'show-view';
+  const stockDetailView = new StockDetailView(this.container);
+  stockDetailView.render(stock);
 
   const stockFormView = new StockFormView(this.container, stock);
   stockFormView.render(stock);
-
-
-  const stockDetailView = new StockDetailView(this.container);
-  stockDetailView.render(stock);
 };
 
 module.exports = ShowStockDetailView;

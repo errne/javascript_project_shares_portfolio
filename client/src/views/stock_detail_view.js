@@ -20,17 +20,17 @@ StockDetailView.prototype.render = function (stock) {
 
   const industry = document.createElement('p');
   industry.className = 'stock-industry';
-  industry.textContent = stock.industry;
+  industry.textContent = `Industry: ${stock.industry}`;
   stockDetailContainer.appendChild(industry);
 
   const description = document.createElement('p');
   description.className = 'stock-description';
-  description.textContent = stock.description;
+  description.textContent = `Description: ${stock.description}`;
   stockDetailContainer.appendChild(description);
 
   const website = document.createElement('a');
   website.className = 'stock-website';
-  website.textContent = stock.website;
+  website.textContent = `Website: ${stock.website}`;
   website.href = stock.website;
   website.target = '_blank';
   stockDetailContainer.appendChild(website);
@@ -42,7 +42,7 @@ StockDetailView.prototype.render = function (stock) {
 
   const amount = document.createElement('p');
   amount.className = 'stock-amount';
-  amount.textContent = stock.amount;
+  amount.textContent = `Holdings: ${stock.amount}`;
   stockDetailContainer.appendChild(amount);
 
 

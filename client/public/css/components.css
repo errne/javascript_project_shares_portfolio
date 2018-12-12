@@ -1,18 +1,71 @@
-/* .list_item {
-  display: flex;
-  border-top: 0.5px solid var(--notGrey);
-  border-bottom: 0.5px solid var(--notGrey);
-  margin: 1px;
-  padding: 1px;
-  height: 15vh;
-  width: 100%;
-  margin: 5px;
+.share {
+  /* display: flex; */
+  /* flex-wrap: wrap;
+  justify-content: space-around; * */
+  border-style: solid;
+  border-color: lightgrey;
+  text-align: center;
+  margin-top: 1vh;
 }
 
-.list_item p {
-  font-size: 12px;
+.share-symbol {
+  font-weight: bold;
 }
 
-.list_item h1 {
-  font-size: 14px;
-} */
+.total-value {
+  align-self: end;
+  text-align: right;
+  border-style: solid;
+  border-color: lightgrey;
+  width: 200px;
+  height: 45px;
+  position: sticky;
+  right: 3px;
+  bottom: 3px;
+}
+
+.stocks {
+  border-style: solid;
+  border-color: lightgrey;
+  text-align: center;
+  margin-top: 1vh;
+}
+
+.symbol {
+  font-weight: bold;
+}
+
+.stock-symbol {
+  font-weight: bold;
+}
+
+.show-view {
+  border-style: solid;
+  border-color: lightgrey;
+  text-align: center;
+  /* margin-top: 1vh; */
+}
+
+.stock-name {
+  text-decoration: underline;
+}
+
+.highcharts-root {
+  font-weight: bold;
+  text-align: center;
+}
+
+tspan {
+  font-weight: bold;
+  text-align: center;
+}
+
+.input-shares{
+  margin-left: 1vw;
+}
+
+
+.show-view button {
+  margin-left: 10px;
+
+}

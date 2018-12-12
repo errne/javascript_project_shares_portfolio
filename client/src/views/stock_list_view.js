@@ -13,7 +13,7 @@ StockListView.prototype.bindEvents = function () {
   })
 };
 
-StockListView.prototype.render = function (shares) {
+StockListView.prototype.render = function () {
   this.container.innerHTML = '';
   const listItemView = new ListItemView(this.container);
   this.allShares.forEach((share) => listItemView.renderStockList(share));

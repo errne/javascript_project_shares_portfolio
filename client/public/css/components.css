@@ -16,3 +16,6 @@
 .list_item h1 {
   font-size: 14px;
 } */
+.line-chart, .highcharts-container {
+  width: 100%;
+}

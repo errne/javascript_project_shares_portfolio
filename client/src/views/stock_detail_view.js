@@ -42,7 +42,7 @@ StockDetailView.prototype.render = function (stock) {
 
   const amount = document.createElement('p');
   amount.className = 'stock-amount';
-  amount.textContent = stock.amount;
+  amount.textContent = `You own ${stock.amount} shares of this stock`;
   stockDetailContainer.appendChild(amount);
 
 

@@ -1,5 +1,6 @@
+
 const ChartHelper = function(stocks) {
-  const stockData = [];
+  const stockData = []; 
   for(stock of stocks) {
     stockData.push({
       name: stock.symbol,

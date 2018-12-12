@@ -9,7 +9,6 @@ const PortfolioListView = function (container) {
 
 PortfolioListView.prototype.bindEvents = function () {
   PubSub.subscribe('Stocks:portfolio-data-loaded', (event) => {
-    console.log('Portfolio-data-loaded: ', event.detail);
     this.render(event.detail);
     this.renderSummary(event.detail);
     this.renderPieChart(event.detail);

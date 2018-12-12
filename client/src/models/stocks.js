@@ -14,8 +14,8 @@ Stocks.prototype.bindEvents = function () {
     .then((stock) => {
       const amount = this.portfolioData.filter(share => share.symbol ===  event.detail);
       stock.amount = amount[0].amount;
-      console.log(stock.amount);
       PubSub.publish('Stock:stock-info-loaded', stock);
+      this.getHistoricData(stock.symbol);
     })
     .catch(console.error);
   });
@@ -29,6 +29,7 @@ Stocks.prototype.bindEvents = function () {
         stock.amount = amount[0].amount;
       }
       PubSub.publish('Stock:stock-info-loaded', stock);
+      this.getHistoricData(stock.symbol);
     })
     .catch(console.error);
   });
@@ -64,7 +65,6 @@ Stocks.prototype.getStocksForPortfolio = function () {
     const portfolioSymbols = this.portfolioData.map(share => share.symbol);
     this.stockData = this.stockData.filter(share => portfolioSymbols.includes(share.symbol));
     this.updatePortfolio();
-    console.log(this.stockData);
   })
   .catch(console.error);
 };
@@ -102,7 +102,6 @@ Stocks.prototype.findID = function (share) {
 };
 
 Stocks.prototype.removeShare = function (data) {
-  console.log('data', data.share);
   const shareAmount = data.share.amount;
   // const newShare = this.createNewPortfolioShare(data.share);
   // const shareID = this.findID(newShare);
@@ -129,14 +128,10 @@ Stocks.prototype.deleteShare = function (data) {
 };
 
 Stocks.prototype.createNewPortfolioShare = function (data) {
-  console.log(data);
-  console.log('stock',data.stock);
   newShare = {
     symbol: data.stock.symbol,
     amount: data.input
   }
-  console.log('symbol', data.stock.symbol);
-  console.log('amount', data.input);
   this.portfolioData.push(newShare);
   this.request.post(newShare)
   .then((shares) => {
@@ -147,6 +142,16 @@ Stocks.prototype.createNewPortfolioShare = function (data) {
 .catch(console.error);
 
 };
+
+Stocks.prototype.getHistoricData = function (symbol) {
+  const historicDataRequest = new RequestHelper(`https://api.iextrading.com/1.0/stock/${symbol}/chart/1y`);
+  historicDataRequest.get()
+  .then((historicData) => {
+    console.log(historicData);
+    PubSub.publish('Stocks:historic-data-loaded', historicData);
+  })
+  .catch(console.error);
+}
 
 
 

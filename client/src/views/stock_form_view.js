@@ -15,7 +15,7 @@ StockFormView.prototype.render = function (stock) {
   this.renderRemoveButton(input, stock);
 
   if (stock.amount < 1) {
-    this.renderAddNewButton(stock);
+    this.renderAddNewButton(stock, input);
   }
 
 
@@ -49,17 +49,24 @@ StockFormView.prototype.renderRemoveButton = function (input, stock) {
   });
 };
 
-StockFormView.prototype.renderAddNewButton = function (stock) {
+StockFormView.prototype.renderAddNewButton = function (stock, input) {
   console.log('cliking', stock);
   const addNewButton = document.createElement('button');
   const text = document.createTextNode('add to your portfolio');
   addNewButton.appendChild(text);
 
   this.container.appendChild(addNewButton);
+  console.log(input);
 
   addNewButton.addEventListener('click', (event) => {
     event.preventDefault();
-    PubSub.publish('FormView:add-to-portfolio-clicked', stock);
+    const data = {
+      stock: stock,
+      input: input.value
+    };
+    console.log('render', data);
+    console.log('input', input.value);
+    PubSub.publish('FormView:add-to-portfolio-clicked', data);
   });
 };
 

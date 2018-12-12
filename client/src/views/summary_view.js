@@ -22,13 +22,14 @@ HeaderView.prototype.renderTotal = function () {
   const totalBox = document.querySelector('#total_box');
   totalBox.textContent = `${this.total}`;
   const changeBox = document.querySelector('#change_box');
-  totalBox.textContent = `${this.change}`;
+  changeBox.textContent = `${this.change}`;
+
   // change colour and add symbol
   const percentBox = document.querySelector('#percent_box');
   const getPercent= (a,b) => {
     return (b === 0) ? 0 : ((a/b) * 100).toFixed(2);
   }
-  totalBox.textContent = `${ getPercent(this.change,this.total) }`;
+  changeBox.textContent = `${ getPercent(this.change,this.total) }`;
   // change colour and add symbol
 };
 

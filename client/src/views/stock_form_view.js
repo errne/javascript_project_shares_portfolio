@@ -6,7 +6,6 @@ const StockFormView = function (container, stock) {
 };
 
 StockFormView.prototype.render = function (stock) {
-console.log(stock);
 
   const input = document.createElement('input');
   input.type = 'number';
@@ -15,14 +14,16 @@ console.log(stock);
 
   this.renderRemoveButton(input, stock);
 
+  if (stock.amount < 1) {
+    this.renderAddNewButton(stock);
+  }
+
 
 };
 
 StockFormView.prototype.renderRemoveButton = function (input, stock) {
-  console.log('input', input);
-  console.log('stock', stock);
   const removeButton = document.createElement('button');
-  const text = document.createTextNode('remove shares');
+  const text = document.createTextNode('add/remove shares');
   removeButton.appendChild(text);
 
   this.container.appendChild(removeButton);
@@ -33,8 +34,32 @@ StockFormView.prototype.renderRemoveButton = function (input, stock) {
       numberOfShares: input.value,
       share: stock
     };
-    console.log('before pub', data);
     PubSub.publish('FormView:remove-clicked', data);
+  });
+
+  const deleteButton = document.createElement('button');
+  const delBtnText = document.createTextNode('delete all shares');
+  deleteButton.appendChild(delBtnText);
+
+  this.container.appendChild(deleteButton);
+
+  deleteButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    PubSub.publish('FormView:delete-clicked', stock);
+  });
+};
+
+StockFormView.prototype.renderAddNewButton = function (stock) {
+  console.log('cliking', stock);
+  const addNewButton = document.createElement('button');
+  const text = document.createTextNode('add to your portfolio');
+  addNewButton.appendChild(text);
+
+  this.container.appendChild(addNewButton);
+
+  addNewButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    PubSub.publish('FormView:add-to-portfolio-clicked', stock);
   });
 };
 

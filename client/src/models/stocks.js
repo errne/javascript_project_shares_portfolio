@@ -10,18 +10,39 @@ const Stocks = function (url) {
 
 Stocks.prototype.bindEvents = function () {
   PubSub.subscribe('ListItemView:link-clicked', (event) => {
-    console.log(event.detail);
     this.getMoreInfoOnStock(event.detail)
     .then((stock) => {
       const amount = this.portfolioData.filter(share => share.symbol ===  event.detail);
       stock.amount = amount[0].amount;
-      console.log(amount);
+      console.log(stock.amount);
       PubSub.publish('Stock:stock-info-loaded', stock);
     })
     .catch(console.error);
   });
+
+  PubSub.subscribe('ListItemView:stock-link-clicked', (event) => {
+    this.getMoreInfoOnStock(event.detail)
+    .then((stock) => {
+      stock.amount = 0;
+      const amount = this.portfolioData.filter(share => share.symbol ===  event.detail);
+      if (amount.length > 0){
+        stock.amount = amount[0].amount;
+      }
+      PubSub.publish('Stock:stock-info-loaded', stock);
+    })
+    .catch(console.error);
+  });
+
   PubSub.subscribe('FormView:remove-clicked', (event) => {
     this.removeShare(event.detail);
+  });
+
+  PubSub.subscribe('FormView:delete-clicked', (event) => {
+    this.deleteShare(event.detail);
+  })
+
+  PubSub.subscribe('FormView:add-to-portfolio-clicked', (event) => {
+    this.createNewPortfolioShare(event.detail);
   })
 };
 
@@ -43,6 +64,7 @@ Stocks.prototype.getStocksForPortfolio = function () {
     const portfolioSymbols = this.portfolioData.map(share => share.symbol);
     this.stockData = this.stockData.filter(share => portfolioSymbols.includes(share.symbol));
     this.updatePortfolio();
+    console.log(this.stockData);
   })
   .catch(console.error);
 };
@@ -80,17 +102,47 @@ Stocks.prototype.findID = function (share) {
 };
 
 Stocks.prototype.removeShare = function (data) {
-  console.log('data', data);
+  console.log('data', data.share);
   const shareAmount = data.share.amount;
+  // const newShare = this.createNewPortfolioShare(data.share);
+  // const shareID = this.findID(newShare);
   const shareID = this.findID(data.share);
-  const newShareAmount = shareAmount - data.numberOfShares;
+  const newShareAmount = (parseInt(shareAmount) + parseInt(data.numberOfShares));
 
   data.share.amount = newShareAmount;
   this.request.update(shareID, data.share)
   .then((shares) => {
+    this.getPortfolioData();
     PubSub.publish('Stocks:portfolio-data-loaded', shares)
 })
 .catch(console.error);
+};
+
+Stocks.prototype.deleteShare = function (data) {
+  const deleteID = this.findID(data);
+  this.request.delete(deleteID)
+  .then((shares) => {
+    this.getPortfolioData();
+    PubSub.publish('Stocks:portfolio-data-loaded', shares)
+})
+.catch(console.error);
+};
+
+Stocks.prototype.createNewPortfolioShare = function (share) {
+  console.log(share);
+  newShare = {
+    symbol: share.symbol,
+    amount: 1
+  }
+  this.portfolioData.push(newShare);
+  this.request.post(newShare)
+  .then((shares) => {
+    this.getPortfolioData();
+    this.getStocksForPortfolio();
+    PubSub.publish('Stocks:portfolio-data-loaded', shares)
+})
+.catch(console.error);
+
 };
 
 

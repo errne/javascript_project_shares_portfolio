@@ -128,12 +128,15 @@ Stocks.prototype.deleteShare = function (data) {
 .catch(console.error);
 };
 
-Stocks.prototype.createNewPortfolioShare = function (share) {
-  console.log(share);
+Stocks.prototype.createNewPortfolioShare = function (data) {
+  console.log(data);
+  console.log('stock',data.stock);
   newShare = {
-    symbol: share.symbol,
-    amount: 1
+    symbol: data.stock.symbol,
+    amount: data.input
   }
+  console.log('symbol', data.stock.symbol);
+  console.log('amount', data.input);
   this.portfolioData.push(newShare);
   this.request.post(newShare)
   .then((shares) => {

@@ -9,7 +9,6 @@ const PortfolioListView = function (container) {
 
 PortfolioListView.prototype.bindEvents = function () {
   PubSub.subscribe('Stocks:portfolio-data-loaded', (event) => {
-    console.log('Portfolio-data-loaded: ', event.detail);
     this.render(event.detail);
     this.renderSummary(event.detail);
     this.renderPieChart(event.detail);
@@ -30,7 +29,7 @@ PortfolioListView.prototype.renderPieChart = function (shares) {
   chartContainer.className ='pie-chart';
   const pieChart = new PieChart('Portfolio diversification chart', dataForChart, chartContainer);
   this.container.appendChild(chartContainer);
-
+};
 
 PortfolioListView.prototype.renderSummary = function (sharesHeld) {
   const getPercentage= (a,b) => {
@@ -61,5 +60,6 @@ PortfolioListView.prototype.renderSummary = function (sharesHeld) {
   tabSummary.appendChild(percentElem);
   this.container.appendChild(tabSummary);
 };
+
 
 module.exports = PortfolioListView;

@@ -34,8 +34,10 @@ ListItemView.prototype.renderPortfolio = function (share) {
   shareContainer.appendChild(latestPrice);
 
   const priceChange = document.createElement('p');
-  priceChange.className = 'share-price-change';
+  // priceChange.className = 'share-price-change';
   priceChange.textContent = `Change: $ ${share.change}`;
+  const classColors = (share.change === 0) ? 'black' : (share.change > 0) ? 'green' : 'red';
+  priceChange.classList = classColors;
   shareContainer.appendChild(priceChange);
 
   const amountOfShares = document.createElement('p');
@@ -82,8 +84,10 @@ ListItemView.prototype.renderStockList = function (stock) {
   stockContainer.appendChild(latestPrice);
 
   const priceChange = document.createElement('p');
-  priceChange.className = 'share-price-change';
+  // priceChange.className = 'share-price-change';
   priceChange.textContent = `Change: $ ${stock.change}`;
+  const classColors = (stock.change === 0) ? 'black' : (stock.change > 0) ? 'green' : 'red';
+  priceChange.classList = classColors;
   stockContainer.appendChild(priceChange);
 
   this.container.appendChild(stockContainer);

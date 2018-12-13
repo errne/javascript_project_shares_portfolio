@@ -9,14 +9,14 @@ const PortfolioListView = function (container) {
 
 PortfolioListView.prototype.bindEvents = function () {
   PubSub.subscribe('Stocks:portfolio-data-loaded', (event) => {
-    this.render(event.detail);
-    this.renderSummary(event.detail);
     this.renderPieChart(event.detail);
+    this.renderSummary(event.detail);
+    this.render(event.detail);
   })
 };
 
 PortfolioListView.prototype.render = function (shares) {
-  this.container.innerHTML = '';
+  // this.container.innerHTML = '';
   const listItemView = new ListItemView(this.container);
   shares.forEach((stockInPortfolio) => listItemView.renderPortfolio(stockInPortfolio));
 };
@@ -24,13 +24,14 @@ PortfolioListView.prototype.render = function (shares) {
 
 
 PortfolioListView.prototype.renderPieChart = function (shares) {
+  this.container.innerHTML = '';
+
   const dataForChart = ChartHelper(shares);
   const chartContainer = document.createElement('div');
   chartContainer.className ='pie-chart';
-  const pieChart = new PieChart('Portfolio diversification chart', dataForChart, chartContainer);
+  const pieChart = new PieChart('Portfolio Diversification Chart', dataForChart, chartContainer);
   this.container.appendChild(chartContainer);
 };
-
 
 PortfolioListView.prototype.renderSummary = function (sharesHeld) {
   const getPercentage= (a,b) => {
@@ -61,5 +62,6 @@ PortfolioListView.prototype.renderSummary = function (sharesHeld) {
   tabSummary.appendChild(percentElem);
   this.container.appendChild(tabSummary);
 };
+
 
 module.exports = PortfolioListView;

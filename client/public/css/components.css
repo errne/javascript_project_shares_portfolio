@@ -1,79 +1,75 @@
 .share {
-  /* display: flex; */
-  /* flex-wrap: wrap;
-  justify-content: space-around; * */
-  border-style: solid;
-  border-color: lightgrey;
-  text-align: center;
-  margin-top: 1vh;
+ /* display: flex; */
+ /* flex-wrap: wrap;
+ justify-content: space-around; * */
+ border-style: solid;
+ border-color: lightgrey;
+ text-align: center;
+ margin-top: 1vh;
 }
 
 .share-symbol {
-  font-weight: bold;
+ font-weight: bold;
 }
 
-<<<<<<< HEAD
-.list_item h1 {
-  font-size: 14px;
-} */
-.line-chart, .highcharts-container {
-  width: 100%;
-=======
 .total-value {
-  align-self: end;
-  text-align: right;
-  border-style: solid;
-  border-color: lightgrey;
-  width: 200px;
-  height: 45px;
-  position: sticky;
-  right: 3px;
-  bottom: 3px;
+ align-self: end;
+ text-align: right;
+ border-style: solid;
+ border-color: lightgrey;
+ width: 200px;
+ height: 45px;
+ position: sticky;
+ right: 3px;
+ bottom: 3px;
 }
 
 .stocks {
-  border-style: solid;
-  border-color: lightgrey;
-  text-align: center;
-  margin-top: 1vh;
+ border-style: solid;
+ border-color: lightgrey;
+ text-align: center;
+ margin-top: 1vh;
 }
 
 .symbol {
-  font-weight: bold;
+ font-weight: bold;
 }
 
 .stock-symbol {
-  font-weight: bold;
+ font-weight: bold;
 }
 
 .show-view {
-  border-style: solid;
-  border-color: lightgrey;
-  text-align: center;
-  /* margin-top: 1vh; */
+ border-style: solid;
+ border-color: lightgrey;
+ text-align: center;
+ /* margin-top: 1vh; */
 }
 
 .stock-name {
-  text-decoration: underline;
+ text-decoration: underline;
 }
 
 .highcharts-root {
-  font-weight: bold;
-  text-align: center;
+ font-weight: bold;
+ text-align: center;
 }
 
 tspan {
-  font-weight: bold;
-  text-align: center;
+ font-weight: bold;
+ text-align: center;
 }
 
 .input-shares{
-  margin-left: 1vw;
+ margin-left: 1vw;
+}
+
+.tab_summary {
+  text-align: center;
 }
 
 
 .show-view button {
-  margin-left: 10px;
+ margin-left: 10px;
 
->>>>>>> 49bceea39aeeb1bb1e9191ac4243945b0bf61b74
 }

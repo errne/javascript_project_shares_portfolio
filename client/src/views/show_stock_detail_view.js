@@ -28,14 +28,6 @@ ShowStockDetailView.prototype.render = function (stock) {
 
   const stockFormView = new StockFormView(this.container, stock);
   stockFormView.render(stock);
-<<<<<<< HEAD
-
-
-  const stockDetailView = new StockDetailView(this.container);
-  stockDetailView.render(stock);
-
-=======
->>>>>>> 49bceea39aeeb1bb1e9191ac4243945b0bf61b74
 };
 
 ShowStockDetailView.prototype.renderLineChart = function (historicData) {

@@ -139,3 +139,17 @@ nav {
   border-bottom: 3px solid var(--blue);
 
 }
+
+aside ul {
+ display: list-item;
+ margin: 3vh;
+}
+
+aside li {
+ margin: 3vh;
+ text-decoration: none;
+}
+
+aside p {
+  margin-top: 60vh;
+}

@@ -1,0 +1,83 @@
+header {
+  justify-content: center;
+}
+
+header nav {
+  margin-top: 2.5vh;
+}
+li {
+    margin-left: 4.5vw;
+    padding-right: 3.5vw;
+}
+main {
+  border-left: 3px solid var(--blue);
+}
+
+.app-container {
+  min-height: 77vh;
+  padding: 2vw;
+  padding-left: 3vw;
+}
+
+aside {
+  display: none;
+}
+
+footer {
+  display: none;
+}
+
+#mobile_nav {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  border-right: 3px solid var(--blue);
+  border-left: 3px solid var(--blue);
+}
+
+@media screen and ( min-width: 795px ) {
+  html, body {
+    height: 100vh;
+  }
+  footer, aside {
+    display: block;
+  }
+  header {
+    justify-content: space-between;
+  }
+  body {
+    display: grid;
+    grid-template-columns: 25vw 75vw;
+    grid-template-rows: minmax(15vh, auto) minmax(auto, 85vh);
+    grid-template-areas:
+    "header header"
+    "aside main";
+  }
+  li {
+      margin-left: 2vw;
+      padding-right: 2vw;
+  }
+
+  main {
+    overflow-y: scroll;
+    border-left: none;
+    border-bottom: 3px solid var(--blue);
+  }
+  footer {
+    width: 100%;
+    height: 7.5vh;
+    padding: 1.5vh;
+  }
+  aside {
+    overflow-y: hidden;
+  }
+  #mobile_nav {
+    display: none;
+  }
+}
+
+@media screen and ( min-width: 1024px ) {
+  body {
+    grid-template-columns: 20vw 80vw;
+  }
+}

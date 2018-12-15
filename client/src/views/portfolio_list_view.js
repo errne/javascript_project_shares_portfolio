@@ -16,7 +16,6 @@ PortfolioListView.prototype.bindEvents = function () {
 };
 
 PortfolioListView.prototype.render = function (shares) {
-  // this.container.innerHTML = '';
   const listItemView = new ListItemView(this.container);
   shares.forEach((stockInPortfolio) => listItemView.renderPortfolio(stockInPortfolio));
 };

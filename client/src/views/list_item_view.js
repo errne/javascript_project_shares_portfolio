@@ -34,7 +34,6 @@ ListItemView.prototype.renderPortfolio = function (share) {
   shareContainer.appendChild(latestPrice);
 
   const priceChange = document.createElement('p');
-  // priceChange.className = 'share-price-change';
   priceChange.textContent = `Change: $ ${share.change}`;
   const classColors = (share.change === 0) ? 'black' : (share.change > 0) ? 'green' : 'red';
   priceChange.classList = classColors;

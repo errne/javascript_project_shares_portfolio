@@ -55,7 +55,6 @@ StockFormView.prototype.renderAddNewButton = function (stock, input) {
   addNewButton.appendChild(text);
 
   this.container.appendChild(addNewButton);
-  console.log(input);
 
   addNewButton.addEventListener('click', (event) => {
     event.preventDefault();

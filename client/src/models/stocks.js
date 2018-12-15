@@ -103,8 +103,6 @@ Stocks.prototype.findID = function (share) {
 
 Stocks.prototype.removeShare = function (data) {
   const shareAmount = data.share.amount;
-  // const newShare = this.createNewPortfolioShare(data.share);
-  // const shareID = this.findID(newShare);
   const shareID = this.findID(data.share);
   const newShareAmount = (parseInt(shareAmount) + parseInt(data.numberOfShares));
 

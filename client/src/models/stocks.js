@@ -1,4 +1,4 @@
-#const PubSub = require('../helpers/pubsub.js');
+const PubSub = require('../helpers/pubsub.js');
 const RequestHelper = require('../helpers/request_helper.js');
 
 const Stocks = function (url) {
@@ -147,7 +147,6 @@ Stocks.prototype.getHistoricData = function (symbol) {
   const historicDataRequest = new RequestHelper(`https://api.iextrading.com/1.0/stock/${symbol}/chart/1y`);
   historicDataRequest.get()
   .then((historicData) => {
-    console.log(historicData);
     PubSub.publish('Stocks:historic-data-loaded', historicData);
   })
   .catch(console.error);

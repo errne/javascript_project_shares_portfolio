@@ -24,7 +24,6 @@ PortfolioListView.prototype.render = function (shares) {
 
 PortfolioListView.prototype.renderPieChart = function (shares) {
   this.container.innerHTML = '';
-
   const dataForChart = ChartHelper(shares);
   const chartContainer = document.createElement('div');
   chartContainer.className ='pie-chart';

@@ -16,6 +16,13 @@ StockListView.prototype.bindEvents = function () {
 StockListView.prototype.render = function () {
   this.container.innerHTML = '';
   const listItemView = new ListItemView(this.container);
+  this.allShares.sort(function(a,b) {
+    if (a.change < b.change)
+  return 1;
+if (a.change > b.change)
+return -1;
+return 0;
+});
   this.allShares.forEach((share) => listItemView.renderStockList(share));
 };
 

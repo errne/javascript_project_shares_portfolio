@@ -34,7 +34,7 @@ const LineChart = function(title, name, data, container) {
         },
         pointStart      : today - 24 * 3600 * 1000 * 365,
         pointInterval   : 24 * 3600 * 1000 * 31,
-        pointEnd        :today
+        pointEnd        : today
       }
     },
     xAxis      : {

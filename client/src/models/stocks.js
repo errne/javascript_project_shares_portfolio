@@ -50,7 +50,8 @@ Stocks.prototype.bindEvents = function () {
 Stocks.prototype.getPortfolioData = function () {
   this.request.get()
   .then((shares) => {
-    PubSub.publish('Stocks:portfolio-data-loaded', shares);
+  //  PubSub.publish('Stocks:portfolio-data-loaded', shares);
+    console.log('get portfolio publish');
     this.portfolioData = shares;
   })
   .catch(console.error);
@@ -88,11 +89,13 @@ Stocks.prototype.updatePortfolio = function () {
   this.stockData.forEach((share) => {
     const shareID = this.findID(share);
     this.request.update(shareID, share)
+    })
+    this.request.get()
     .then((shares) => {
       PubSub.publish('Stocks:portfolio-data-loaded', shares);
+      console.log('update portfolio publish');
     })
     .catch(console.error);
-  })
 };
 
 Stocks.prototype.findID = function (share) {
@@ -135,7 +138,8 @@ Stocks.prototype.createNewPortfolioShare = function (data) {
   .then((shares) => {
     this.getPortfolioData();
     this.getStocksForPortfolio();
-    PubSub.publish('Stocks:portfolio-data-loaded', shares)
+    //PubSub.publish('Stocks:portfolio-data-loaded', shares)
+    console.log(shares);
 })
 .catch(console.error);
 

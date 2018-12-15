@@ -3,7 +3,6 @@ const app = express();
 const path = require('path');
 const parser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
-const createRouterStock = require('./helpers/create_router_stock.js');
 const createRouterPortfolio= require('./helpers/create_router_portfolio.js');
 
 
@@ -13,11 +12,8 @@ app.use(express.static(publicPath));
 MongoClient.connect('mongodb://localhost:27017')
 .then((client) => {
   const db = client.db('shares_portfolio');
-  const stocksCollection = db.collection('stocks');
   const portfolioCollection = db.collection('portfolio');
-  const stockRouter = createRouterStock(stocksCollection);
   const portfolioRouter = createRouterPortfolio(portfolioCollection);
-  app.use('/api/stocks', stockRouter);
   app.use('/api/portfolio', portfolioRouter);
 })
 .catch(console.err);
